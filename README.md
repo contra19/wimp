@@ -13,5 +13,40 @@ A production-grade alert management system built to demonstrate SRE best practic
 ## Local Development
 Coming soon.
 
+## WIMP API
+WIMP has an API layer that includes the following endpoints: 
+
+### GET /health 
+
+Checks status of the WIMP API
+
+### POST /alerts
+
+Creates a new alert in the system.
+
+**Required fields:**
+- `service_name` (string) - Name of the service triggering the alert
+- `message` (string) - Description of the alert condition
+- `service_version` (string) - Version of the service
+
+**Optional fields:**
+- `severity` (string) - Alert severity, defaults to "normal"
+
+**Auto-generated:**
+- `alert_id` (UUID) - Unique identifier
+- `timestamp` (datetime) - Server-side timestamp
+
+**Example request:**
+```json
+{
+"service_name": "payment-api",
+"severity": "critical",
+"message": "Database connection failed",
+"service_version": "v2.1"
+}
+```
+
+you can browse to **/docs** for self-generated docs explaining all of the endpoints above.
+
 ## Status
 🚧 Under active development
