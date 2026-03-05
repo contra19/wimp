@@ -11,7 +11,18 @@ A production-grade alert management system built to demonstrate SRE best practic
 - **Orchestration**: Kubernetes
 
 ## Local Development
-Coming soon.
+### Startup Process
+### Terminal 1 - start the database
+``` bash
+cd ~/wimp/infra/local
+docker compose up -d
+```
+### Terminal 2 - start the API
+``` bash
+cd ~/wimp/api
+source venv/bin/activate
+uvicorn main:app --reload
+```
 
 ## WIMP API
 WIMP has an API layer that includes the following endpoints: 
