@@ -12,16 +12,26 @@ A production-grade alert management system built to demonstrate SRE best practic
 
 ## Local Development
 ### Startup Process
-### Terminal 1 - start the database
+### Database Terminal - start the DB
 ``` bash
 cd ~/wimp/infra/local
 docker compose up -d
 ```
-### Terminal 2 - start the API
+### API Terminal - start the API
 ``` bash
 cd ~/wimp/api
 source venv/bin/activate
 uvicorn main:app --reload
+```
+
+### Shutdown Process
+### API Terminal
+CTRL+C
+
+### Database Terminal - Stop the DB
+``` bash
+cd ~/wimp/infra/local
+docker compose down
 ```
 
 ## WIMP API
