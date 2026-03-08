@@ -109,42 +109,65 @@ is_duplicate: Boolean       # False for new alerts, True for duplicates
 
 ---
 
+## Cert Strategy
+**Terraform first, CKA second.** Terraform is the easier cert and gets something on the
+resume sooner. CKA benefits from the full 8 weeks of hands-on K8s work through WIMP.
+
+**Rule: Terraform course every afternoon without exception until April 4.**
+25.5 hours over 26 days = ~1 hour minimum per day, target 2 hours.
+
+| Cert | Target | Exam |
+|------|--------|------|
+| Terraform Associate | April 4, 2026 | Zeal Vora course + 2 practice tests |
+| CKA | May 1, 2026 | CKA Udemy course + Killercoda labs |
+
+---
+
 ## What's Next — Week 2 (March 9-13)
 
 ### Monday March 9
 - Killercoda: CKA Section 4 - Logging & Monitoring (kubectl logs, describe)
 - WIMP: Add severity levels (critical, warning, info) with validation
 - WIMP: GET /alerts endpoint with filtering by severity
+- **Terraform course: Start - Providers, Resources, State (afternoon)**
 - Scripting: Day 05 - Calculate error rates from log entries
-- Start Zeal Vora Terraform Associate course (25.5 hours)
+- Job search: 2-3 applications
 
 ### Tuesday March 10
 - Killercoda: CKA Section 5 - Application Lifecycle (rolling updates, rollbacks)
 - WIMP: Dockerfile for API
 - WIMP: Push image to ghcr.io (GitHub Container Registry)
+- **Terraform course: Continue (afternoon)**
 - Scripting: Day 06 - Parse timestamps, calculate duration
+- Job search: 2-3 applications
 
 ### Wednesday March 11
-- Terraform course: Providers, Resources, State
-- WIMP: Terraform VPC configuration (write, plan only - no apply)
+- Killercoda: K8s Networking basics
+- WIMP: Terraform VPC configuration (write and plan only - no apply)
+- **Terraform course: Variables and outputs (afternoon)**
 - Scripting: Day 07 - Aggregate metrics by service name
+- Job search: 2-3 applications
 
 ### Thursday March 12
-- Terraform course: Variables, outputs
+- Killercoda: K8s Namespaces
 - WIMP: Terraform subnets and internet gateway
+- **Terraform course: Modules (afternoon)**
 - Scripting: Day 08
+- Job search: 2-3 applications
 
 ### Friday March 13
-- Terraform course: Modules
-- WIMP: Week 2 review and cleanup
+- Killercoda: Review and practice
+- WIMP: Week 2 cleanup and commit
+- **Terraform course: Continue (afternoon)**
 - Scripting: Day 09
+- Job search: Weekly review
 
 ---
 
 ## Known Issues / Open Items
 - Architecture diagram (Excalidraw) not yet created
 - .env.example files not yet created
-- No GET /alerts endpoint yet - Week 2 priority
+- No GET /alerts endpoint yet - Week 2 Monday priority
 - alert_id in AlertCreate Pydantic model could be removed since DB handles generation
   (low priority - current approach works fine)
 
@@ -170,6 +193,8 @@ is_duplicate: Boolean       # False for new alerts, True for duplicates
 - Labels and selectors
 - nodeSelector
 - Taints and tolerations
+- kubeadm cluster bootstrap (beginner course)
+- Calico CNI installation
 
 ## K8s Concepts Still To Cover
 - Namespaces
@@ -180,5 +205,5 @@ is_duplicate: Boolean       # False for new alerts, True for duplicates
 - NetworkPolicy
 - Resource limits and HPA
 - Liveness/readiness probes
-- kubeadm cluster setup and upgrade
+- kubeadm upgrade
 - etcd backup and restore
