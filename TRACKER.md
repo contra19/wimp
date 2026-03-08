@@ -9,7 +9,7 @@
 | Cert | Target Date | Status |
 |------|-------------|--------|
 | Terraform Associate | April 4, 2026 | 🔲 In Progress |
-| CKA (Kubernetes Admin) | April 10, 2026 | 🔲 In Progress |
+| CKA (Kubernetes Admin) | May 1, 2026 | 🔲 In Progress |
 | AWS SAA | Post-employment | ⏸ Deferred |
 
 ---
@@ -74,7 +74,7 @@
 - [x] Kubernetes beginner course completed
 - [x] Zeal Vora Terraform Associate course enrolled
 - [x] Project tracking docs created and committed
-- [x] Cert target dates updated (Terraform: April 4, CKA: April 10)
+- [x] Cert target dates updated (Terraform: April 4, CKA: May 1)
 
 ---
 
@@ -132,7 +132,7 @@
 - [ ] WIMP: Prometheus metrics
 - [ ] WIMP: Grafana dashboards
 - [ ] WIMP: Health probes (liveness, readiness)
-- [ ] **CKA Exam - April 10**
+- [ ] **CKA Exam - May 1**
 
 ---
 
