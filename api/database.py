@@ -1,6 +1,6 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, declarative_base
-from sqlalchemy import Column, Integer, String, DateTime
+from sqlalchemy import Column, Integer, String, DateTime, Boolean
 from sqlalchemy.dialects.postgresql import UUID as pgUUID
 from uuid import uuid4
 from datetime import datetime
@@ -25,6 +25,7 @@ class Alert(Base):
     message = Column(String)
     service_version = Column(String)
     timestamp = Column(DateTime, default=datetime.utcnow)
+    is_duplicate = Column(Boolean, default=False)
 
 def get_db():
     db = SessionLocal()
