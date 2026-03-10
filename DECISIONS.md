@@ -1,5 +1,5 @@
 # WIMP - Architectural Decisions Log
-## Last Updated: Saturday, March 7, 2026
+## Last Updated: Monday, March 9, 2026
 
 This document records every significant architectural decision made during WIMP development,
 including the reasoning behind each choice. Use this during interviews to speak confidently
@@ -175,7 +175,6 @@ to production AWS infrastructure on demand."
 FastAPI pattern. The API contract and database schema evolve independently — you don't
 want database implementation details leaking into your API responses."
 
-
 ---
 
 ## Decision 009: Record All Alerts Including Duplicates
@@ -197,3 +196,87 @@ rather than discarding them
 **Interview answer:** "We record everything for audit and observability purposes.
 The is_duplicate flag lets downstream systems decide how to act on alerts without
 losing the raw signal. Suppressing storage would make post-incident analysis harder."
+
+---
+
+## Decision 010: Pagination over Arbitrary Result Limits on GET /alerts
+**Date:** March 9, 2026
+**Decision:** Use page/page_size pagination on GET /alerts rather than a hard row cap
+
+**Reasoning:**
+- A hard cap (e.g. 1000 rows) is arbitrary and breaks legitimate use cases — during a
+  major incident, 1000 alerts could represent only 10 minutes of data for a high-traffic
+  service, making the tool useless for exactly the scenarios it was built for
+- Pagination puts control in the caller's hands — they stop pulling pages when they have
+  what they need, without the API deciding what "enough" data is
+- Returns total count and total_pages in every response so callers know upfront how much
+  data exists without blind pagination
+- Scales naturally — same endpoint serves dashboards (page 1, small page_size) and
+  RCA investigations (paginate through all matching records)
+- No unbounded queries — every response is still capped at page_size rows
+
+**Tradeoffs:**
+- Slightly more complex client logic vs a simple list response
+- Multiple requests required for large result sets
+
+**Interview answer:** "We use pagination instead of arbitrary limits because a hard cap
+breaks incident investigation workflows — you don't know upfront how many alerts an
+incident generated. Pagination lets the caller retrieve exactly what they need while
+the API never returns an unbounded result set."
+
+---
+
+## Decision 011: Enum over Literal for Severity Levels
+**Date:** March 9, 2026
+**Decision:** Use Python Enum (SeverityLevel) instead of Literal type for severity validation
+
+**Reasoning:**
+- Severity levels are a core domain concept used across multiple layers — API validation,
+  database filtering, future worker routing, and Slack/PagerDuty notification logic
+- Enum centralizes the valid values in one place — adding or changing a severity level
+  requires one change, not a find-and-replace across the codebase
+- `SeverityLevel.critical` as a referenceable constant is cleaner than the string
+  "critical" scattered across filter conditions and routing logic
+- `str, Enum` inheritance ensures JSON serialization works without extra configuration —
+  FastAPI and Pydantic handle it transparently
+
+**Tradeoffs:**
+- More code upfront than a one-line Literal type
+- Worth it given severity is referenced in multiple layers
+
+**Interview answer:** "I used Enum over Literal because severity levels are a domain
+concept that will be referenced across API validation, filtering, and notification routing.
+Centralizing them in an Enum means one place to change if requirements evolve, and
+SeverityLevel.critical as a constant is more reliable than string literals scattered
+throughout the codebase."
+
+---
+
+## Decision 012: Separate /alerts and /alerts/summary Endpoints
+**Date:** March 9, 2026
+**Decision:** Build two distinct endpoints for alert data — paginated raw records and
+aggregated summary counts — rather than one endpoint that serves both use cases
+
+**Reasoning:**
+- Raw alert records (GET /alerts) and dashboard summary data (GET /alerts/summary) are
+  fundamentally different query types with different performance profiles and response shapes
+- GET /alerts returns individual records for investigation and RCA — pagination required,
+  response is a list of alert objects
+- GET /alerts/summary returns aggregated counts by severity and service for dashboards —
+  single fast aggregation query, no pagination needed
+- Mixing both into one endpoint would require complex response shaping logic and make
+  neither use case work cleanly
+- Mirrors how production observability platforms (e.g. Datadog) separate log search from
+  dashboard metrics — same underlying data, different access patterns
+
+**Tradeoffs:**
+- Two endpoints to maintain instead of one
+- Worth it for clean separation of concerns and performance predictability
+
+**Status:** GET /alerts implemented in Week 2. GET /alerts/summary planned for Week 5-6
+alongside Prometheus metrics integration.
+
+**Interview answer:** "Dashboard consumers need aggregated counts — total critical alerts
+by service in the last hour. Investigation consumers need raw paginated records. These are
+different query types with different performance profiles. Serving both from one endpoint
+would mean compromising both use cases. Separate endpoints keep each use case clean."

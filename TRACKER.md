@@ -14,6 +14,23 @@
 
 ---
 
+## Terraform Course Progress (Zeal Vora - 25.5 hours)
+| Section | Title | Duration | Status |
+|---------|-------|----------|--------|
+| 1 | Introduction | 53min | ✅ Complete |
+| 2 | Getting Started & Setting Up Labs | 53min | 🔲 In Progress |
+| 3 | Deploying Infrastructure with Terraform | 2hr 5min | 🔲 Not Started |
+| 4 | Read, Generate, Modify Configurations | 10hr 9min | 🔲 Not Started |
+| 5 | Terraform Provisioners | 56min | 🔲 Not Started |
+| 6 | Terraform Modules & Workspaces | 2hr 17min | 🔲 Not Started |
+| 7 | Remote State Management | 2hr 4min | 🔲 Not Started |
+| 8 | Security Primer | 1hr 6min | 🔲 Not Started |
+| 9 | Terraform Cloud & Enterprise Capabilities | 1hr 58min | 🔲 Not Started |
+| 10 | Terraform Challenges | 1hr 34min | 🔲 Not Started |
+| 11 | Exam Preparation Section | 1hr 33min | 🔲 Not Started |
+
+---
+
 ## Week 1: Foundation + K8s Core Concepts ✅ COMPLETE
 ### March 2 - 8, 2026
 
@@ -75,30 +92,66 @@
 - [x] Zeal Vora Terraform Associate course enrolled
 - [x] Project tracking docs created and committed
 - [x] Cert target dates updated (Terraform: April 4, CKA: May 1)
+- [x] Terraform course Section 1 completed
 
 ---
 
 ## Week 2: K8s Logging + Terraform Basics
 ### March 9 - 13, 2026
-- [ ] Killercoda: CKA Section 4 - Logging & Monitoring
+
+#### Monday March 9 ✅ COMPLETE
+- [x] Killercoda: CKA Section 4 - Logging & Monitoring
+  - kubectl logs, --follow, --tail, --previous
+  - -c flag for multi-container pods
+  - kubectl describe — reading Events section
+  - kubectl top (concept covered, metrics-server not available in env)
+- [x] WIMP: SeverityLevel Enum (info/normal/warning/critical)
+- [x] WIMP: GET /alerts endpoint with pagination
+  - page / page_size parameters
+  - severity and service_name filters
+  - start_date / end_date date range with validation
+  - AlertResponse and AlertListResponse models
+  - HTTPException for clean 400 error responses
+- [x] Scripting: Day 05 - Error rates from log entries
+  - defaultdict with lambda, sorting with key, side effects concept
+- [ ] Terraform course: Section 2 - Getting Started (deferred to Tuesday)
+- [ ] Job search: 2-3 applications (carry forward)
+
+#### Tuesday March 10
 - [ ] Killercoda: CKA Section 5 - Application Lifecycle
-- [ ] Terraform course: Providers, Resources, State (start)
-- [ ] Terraform course: Variables, outputs, modules
-- [ ] WIMP: Severity levels with validation
-- [ ] WIMP: GET /alerts endpoint with filtering
 - [ ] WIMP: Dockerfile for API
 - [ ] WIMP: Push image to ghcr.io
+- [ ] **Terraform course: Section 2 + start Section 3 (afternoon — priority)**
+- [ ] Scripting: Day 06 - Parse timestamps, calculate duration
+- [ ] Job search: 2-3 applications
+
+#### Wednesday March 11
+- [ ] Killercoda: K8s Networking basics
 - [ ] WIMP: Terraform VPC configuration (plan only)
+- [ ] **Terraform course: Section 3 + start Section 4 (afternoon)**
+- [ ] Scripting: Day 07 - Aggregate metrics by service name
+- [ ] Job search: 2-3 applications
+
+#### Thursday March 12
+- [ ] Killercoda: K8s Namespaces
 - [ ] WIMP: Terraform subnets and internet gateway
-- [ ] Scripting: Days 05-09
-- [ ] Job search: 10+ applications
+- [ ] **Terraform course: Section 4 continues (afternoon)**
+- [ ] Scripting: Day 08
+- [ ] Job search: 2-3 applications
+
+#### Friday March 13
+- [ ] Killercoda: Review and practice
+- [ ] WIMP: Week 2 cleanup and commit
+- [ ] **Terraform course: Section 4 continues (afternoon)**
+- [ ] Scripting: Day 09
+- [ ] Job search: Weekly review
 
 ---
 
 ## Week 3: Terraform Deep Dive + K8s Networking
 ### March 16 - 20, 2026
-- [ ] Terraform course: Complete remaining content
-- [ ] Terraform course: Practice tests x2
+- [ ] Terraform course: Complete Section 4 (10hr 9min — likely spans Weeks 2-3)
+- [ ] Terraform course: Sections 5-7
 - [ ] Terraform: EKS cluster configuration
 - [ ] WIMP: RabbitMQ via Docker Compose
 - [ ] WIMP: Basic worker service
@@ -122,6 +175,7 @@
 - [ ] WIMP: Slack integration
 - [ ] WIMP: PagerDuty integration
 - [ ] WIMP: Alert throttling
+- [ ] Terraform course: Sections 8-11 + practice tests
 - [ ] **Terraform Associate Exam - April 4**
 
 ---
@@ -131,6 +185,7 @@
 - [ ] CKA: Full exam prep and practice
 - [ ] WIMP: Prometheus metrics
 - [ ] WIMP: Grafana dashboards
+- [ ] WIMP: GET /alerts/summary endpoint
 - [ ] WIMP: Health probes (liveness, readiness)
 - [ ] **CKA Exam - May 1**
 
@@ -165,9 +220,15 @@
 - [x] Auto-generated timestamps
 - [x] Alert deduplication logic (5 minute window)
 - [x] All alerts recorded with is_duplicate flag
-- [ ] GET /alerts with filtering
-- [ ] Severity validation (critical/warning/info/normal)
-- [ ] Severity prioritization
+- [x] SeverityLevel Enum (info/normal/warning/critical)
+- [x] GET /alerts with pagination (page/page_size)
+- [x] GET /alerts severity filtering
+- [x] GET /alerts service_name filtering
+- [x] GET /alerts date range filtering (start_date/end_date)
+- [x] AlertResponse model (separate from DB model)
+- [x] AlertListResponse with total/page/size/total_pages metadata
+- [x] HTTPException for clean error responses
+- [ ] GET /alerts/summary (aggregated counts for dashboards) — Week 6
 - [ ] Slack integration
 - [ ] PagerDuty integration
 - [ ] Alert throttling
@@ -194,7 +255,7 @@
 - [x] Startup/shutdown procedures
 - [x] TRACKER.md
 - [x] CONTEXT.md
-- [x] DECISIONS.md
+- [x] DECISIONS.md (Decisions 001-012)
 - [ ] .env.example files
 - [ ] Runbooks
 - [ ] Architecture diagram (Excalidraw)
@@ -206,8 +267,9 @@
 - [x] Day 02: Alert deduplication with time windows
 - [x] Day 03: Group by key, calculate percentages
 - [x] Day 04: Find duplicates within time window
-- [ ] Day 05: Calculate error rates from log entries
-- [ ] Day 06+: Ongoing daily practice
+- [x] Day 05: Calculate error rates (defaultdict, lambda, sorting, side effects)
+- [ ] Day 06: Parse timestamps, calculate duration
+- [ ] Day 07+: Ongoing daily practice
 
 ---
 
