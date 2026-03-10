@@ -7,12 +7,16 @@ from datetime import datetime
 import os
 from dotenv import load_dotenv
 
-# load environment variables from .env file at /infra/local/.env
+# In container, credentials come from environment variables at runtime
+# Locally, load from .env file if present
 load_dotenv(dotenv_path=os.path.join(os.path.dirname(__file__), '../infra/local/.env'))
 
-Base = declarative_base()
+DATABASE_URL = os.getenv(
+    'DATABASE_URL',
+    f"postgresql://wimp_user:{os.getenv('POSTGRES_PASSWORD')}@localhost:5432/wimp"
+)
 
-DATABASE_URL = f"postgresql://wimp_user:{os.getenv('POSTGRES_PASSWORD')}@localhost:5432/wimp"
+Base = declarative_base()
 engine = create_engine(DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
