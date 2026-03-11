@@ -29,7 +29,9 @@ Longest outage: notification (45 minutes, 45 seconds)
 '''
 from datetime import datetime, timedelta
 
+# Function to calculate durations of alerts
 def calculate_durations(events):
+    # Parse timestamps and calculate duration for each event
     dt_format = "%Y-%m-%d %H:%M:%S"
     durations = []
     for event in events:
@@ -40,12 +42,16 @@ def calculate_durations(events):
         durations.append((event["service"], int(minutes), int(seconds), duration.total_seconds()))
     return durations
 
+# Function to find the longest outage
 def get_longest_outage(durations):
     return max(durations, key=lambda x: x[3])
 
+# Calculate durations and print results
 print("Alert Durations:")
 durations = calculate_durations(events)
+# Print each service's duration
 for service, minutes, seconds, _ in durations:
     print(f"{service}: {minutes} minutes, {seconds} seconds")
 longest_service, longest_minutes, longest_seconds, _ = get_longest_outage(durations)
+# Print longest outage information
 print(f"\nLongest outage: {longest_service} ({longest_minutes} minutes, {longest_seconds} seconds)")
