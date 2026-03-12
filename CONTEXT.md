@@ -1,15 +1,15 @@
 # WIMP - Session Context
-## Last Updated: Monday, March 9, 2026
+## Last Updated: Wednesday, March 11, 2026
 
 ---
 
 ## Current Status
-**Week 2 of 8 — Day 1 Complete**
+**Week 2 of 8 — Day 3 Complete**
 
-GET /alerts is fully implemented with pagination, severity Enum validation, optional
-service_name filtering, and date range support. The API now has a complete read/write
-cycle: POST alerts in, GET alerts out with filtering and pagination. All committed and
-pushed to GitHub.
+Terraform VPC configuration is written and planned clean — 6 resources, 0 errors.
+Docker image is built, tested, and pushed to ghcr.io. API is fully functional with
+pagination, severity Enum, and date range filtering. K8s networking concepts covered
+through NetworkPolicy.
 
 ---
 
@@ -19,19 +19,18 @@ pushed to GitHub.
 - POST /alerts → validates input, checks for duplicates, stores all alerts in PostgreSQL
 - Duplicate detection: same service_name + message within 5 minute window
 - All alerts recorded (duplicates flagged with is_duplicate=True, not suppressed)
-- GET /alerts → paginated alert retrieval with the following parameters:
-  - `severity` — filter by SeverityLevel Enum (info/normal/warning/critical)
-  - `service_name` — filter by service name
-  - `start_date` / `end_date` — explicit date range (both required if either provided)
-  - `page` — page number, default 1
-  - `page_size` — results per page, default 10
-  - Default behavior: last 15 minutes, page 1, page_size 10
-- SeverityLevel Enum centralizes valid severity values across the codebase
-- AlertResponse model controls API output shape (separate from DB model)
-- AlertListResponse wraps paginated results with total, page, size, total_pages metadata
-- HTTPException returns clean 400 errors for invalid date range inputs
+- GET /alerts → paginated alert retrieval with:
+  - severity filter (SeverityLevel Enum: info/normal/warning/critical)
+  - service_name filter
+  - start_date / end_date date range with validation
+  - page / page_size pagination
+  - Default: last 15 minutes, page 1, page_size 10
+- AlertResponse and AlertListResponse models (separate from DB model)
+- HTTPException for clean 400 error responses
 - PostgreSQL running in Docker container via Docker Compose
 - Swagger UI available at `http://localhost:8000/docs`
+- Docker image: ghcr.io/contra19/wimp-api:latest (private, make public Week 8)
+- Terraform VPC plan: 9 resources ready to apply (Week 7)
 
 ---
 
@@ -49,6 +48,16 @@ cd ~/wimp/api
 source venv/bin/activate
 uvicorn main:app --reload
 ```
+
+**Run containerized API (for testing Docker image):**
+```bash
+WIMP_HOST_IP=$(ip addr show eth0 | grep 'inet ' | awk '{print $2}' | cut -d/ -f1)
+docker run -p 8000:8000 \
+  -e DATABASE_URL="postgresql://wimp_user:$(grep POSTGRES_PASSWORD ~/wimp/infra/local/.env | cut -d= -f2)@${WIMP_HOST_IP}:5432/wimp" \
+  wimp-api:latest
+```
+
+Note: Use WSL2 host IP directly — host.docker.internal does not reliably resolve in WSL2.
 
 ## How To Stop The System
 
@@ -71,10 +80,15 @@ docker compose down
   /api
     main.py          # FastAPI app, endpoints, Pydantic models, dedup logic
     database.py      # SQLAlchemy engine, session, Alert model, get_db
+    Dockerfile       # Container definition for wimp-api
+    requirements.txt # Python dependencies
     venv/            # Python virtual environment (not committed)
   /worker            # Queue processor (not yet implemented)
   /infra
-    /aws             # Terraform for AWS (not yet implemented)
+    /aws
+      main.tf        # VPC, Internet Gateway, public/private subnets
+      variables.tf   # region, project, environment, CIDR variables
+      outputs.tf     # (empty — to be populated Week 7)
     /local
       docker-compose.yml  # PostgreSQL local container
       .env               # DB credentials (not committed - gitignored)
@@ -86,7 +100,9 @@ docker compose down
       day02.py       # Alert deduplication with time windows
       day03.py       # Group by key, calculate percentages
       day04.py       # Find duplicates within time window
-      day05.py       # Calculate error rates from log entries (defaultdict, lambda, sorting)
+      day05.py       # Calculate error rates (defaultdict, lambda, side effects)
+      day06.py       # Parse timestamps, calculate duration (strptime, divmod)
+      day07.py       # Aggregate metrics by service name (running totals, sorted)
   TRACKER.md         # Progress checklist
   CONTEXT.md         # This file
   DECISIONS.md       # Architectural decisions log
@@ -140,20 +156,35 @@ is_duplicate: Boolean       # False for new alerts, True for duplicates
 
 ---
 
+## Terraform VPC Design
+```
+AWS VPC (10.0.0.0/16) — wimp-dev-vpc
+├── Public Subnets
+│   ├── wimp-dev-public-1 (10.0.1.0/24) — us-east-1a
+│   └── wimp-dev-public-2 (10.0.2.0/24) — us-east-1b
+├── Private Subnets
+│   ├── wimp-dev-private-1 (10.0.10.0/24) — us-east-1a
+│   └── wimp-dev-private-2 (10.0.11.0/24) — us-east-1b
+└── Internet Gateway — wimp-dev-igw
+```
+
+Still to add: NAT gateway, EKS, RDS, SQS (Weeks 3-4)
+
+---
+
 ## Cert Strategy
 **Terraform first, CKA second.**
 
 **Terraform course:** Zeal Vora Terraform Associate (25.5 hours, 11 sections)
-- Section 1: Introduction ✅ Complete
-- Section 2: Getting Started & Setting Up Labs — starting today
-- Sections 3-11: In progress over Weeks 2-4
+- Sections 1-3: ✅ Complete
+- Section 4: In progress (10hr 9min — the big one)
+- Sections 5-11: Upcoming
 - Target exam date: April 4, 2026
 - Rule: Terraform course every afternoon without exception until April 4
   Target 2 hours per day minimum
 
 **CKA:** Mumshad Udemy course + Killercoda labs
 - Target exam date: May 1, 2026
-- Benefits from full 8 weeks of hands-on K8s work through WIMP
 
 | Cert | Target | Resource |
 |------|--------|----------|
@@ -162,58 +193,45 @@ is_duplicate: Boolean       # False for new alerts, True for duplicates
 
 ---
 
-## What's Next — Week 2 (March 9-13)
-
-### Monday March 9 ✅ COMPLETE
-- ✅ Killercoda: CKA Section 4 - Logging & Monitoring (kubectl logs, describe, --previous, --follow, -c)
-- ✅ WIMP: SeverityLevel Enum with info/normal/warning/critical
-- ✅ WIMP: GET /alerts with pagination, date range filtering, severity and service_name filters
-- ✅ Scripting: Day 05 - Error rates from log entries (defaultdict, lambda, side effects)
-- Terraform course: Section 2 - Getting Started & Setting Up Labs (afternoon — deferred to Tuesday)
-- Job search: 2-3 applications (carry forward to Tuesday)
-
-### Tuesday March 10
-- Killercoda: CKA Section 5 - Application Lifecycle (rolling updates, rollbacks)
-- WIMP: Dockerfile for API
-- WIMP: Push image to ghcr.io (GitHub Container Registry)
-- **Terraform course: Section 2 + start Section 3 (afternoon — priority)**
-- Scripting: Day 06 - Parse timestamps, calculate duration
-- Job search: 2-3 applications
-
-### Wednesday March 11
-- Killercoda: K8s Networking basics
-- WIMP: Terraform VPC configuration (write and plan only - no apply)
-- **Terraform course: Section 3 + start Section 4 (afternoon)**
-- Scripting: Day 07 - Aggregate metrics by service name
-- Job search: 2-3 applications
+## What's Next — Week 2 Remaining (March 12-13)
 
 ### Thursday March 12
 - Killercoda: K8s Namespaces
-- WIMP: Terraform subnets and internet gateway
-- **Terraform course: Section 4 continues (afternoon)**
+- WIMP: Terraform routing tables (public route table + associations)
+- **Terraform course: Section 4 — priority, start today**
 - Scripting: Day 08
 - Job search: 2-3 applications
 
 ### Friday March 13
 - Killercoda: Review and practice
 - WIMP: Week 2 cleanup and commit
-- **Terraform course: Section 4 continues (afternoon)**
+- **Terraform course: Section 4 continues**
 - Scripting: Day 09
 - Job search: Weekly review
+
+## Week 3 Preview (March 16-20)
+- TherapyNotes phone screen — Tuesday March 17 at 10am EST (Rochelle Hall)
+  - Prep: Monday afternoon or Tuesday morning
+  - Role: Database SRE — PostgreSQL focus, Datadog observability, Python automation
+  - Salary anchored at $175K
+- Terraform Section 4 continues — likely spans into Week 3
+- K8s: Storage, ConfigMaps, Secrets
 
 ---
 
 ## Known Issues / Open Items
 - Architecture diagram (Excalidraw) not yet created
 - .env.example files not yet created
-- GET /alerts/summary endpoint — planned Week 5-6 (see Decision 012)
-- alert_id in AlertCreate Pydantic model could be removed since DB handles generation
-  (low priority - current approach works fine)
+- GET /alerts/summary endpoint — planned Week 6
+- Terraform outputs.tf empty — populate Week 7
+- Terraform routing tables ✅ complete — public route table + subnet associations
+- GitHub Actions CI/CD pipeline — planned Week 7 (start course when ready to build)
+- host.docker.internal unreliable in WSL2 — use eth0 IP for container testing
 
 ---
 
 ## Environment Details
-- OS: Windows 11 with WSL2 (Ubuntu)
+- OS: Windows 11 with WSL2 (Ubuntu 24.04)
 - Python: 3.12
 - FastAPI + Uvicorn
 - SQLAlchemy + psycopg2-binary + python-dotenv
@@ -221,6 +239,7 @@ is_duplicate: Boolean       # False for new alerts, True for duplicates
 - Kind cluster: wimp-control-plane (v1.29.2)
 - kubectl: v1.35.2
 - Terraform: v1.14.6
+- WSL2 host IP: 172.31.19.95 (use for container-to-host PostgreSQL connections)
 
 ---
 
@@ -228,26 +247,26 @@ is_duplicate: Boolean       # False for new alerts, True for duplicates
 - Pods (imperative and declarative)
 - Deployments, ReplicaSets, scaling
 - Rolling updates and rollbacks
-- Services (ClusterIP)
+- Services (ClusterIP, NodePort)
 - Labels and selectors
 - nodeSelector
 - Taints and tolerations
-- kubeadm cluster bootstrap (beginner course)
+- kubeadm cluster bootstrap
 - Calico CNI installation
-- Logging: kubectl logs, --follow, --tail, --previous, -c for multi-container pods
-- Describe: reading Events section for crash diagnosis
-- kubectl top (concept — metrics-server not installed in Killercoda env)
+- Logging: kubectl logs, --follow, --tail, --previous, -c
+- Describe: reading Events section
+- kubectl top (concept — metrics-server required)
+- Application Lifecycle: set image, rollout, undo, --to-revision, scale, edit
+- Networking: ClusterIP, NodePort, DNS resolution, cross-namespace DNS
+- NetworkPolicy: deny-all, podSelector, namespaceSelector, AND vs OR logic
 
 ## K8s Concepts Still To Cover
-- Namespaces
+- Namespaces (deep dive)
 - ConfigMaps and Secrets
 - Persistent Volumes
 - Ingress
 - RBAC
-- NetworkPolicy
 - Resource limits and HPA
 - Liveness/readiness probes
 - kubeadm upgrade
 - etcd backup and restore
-- Application Lifecycle (Section 5)
-- K8s Networking (CNI, DNS)

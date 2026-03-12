@@ -18,9 +18,9 @@
 | Section | Title | Duration | Status |
 |---------|-------|----------|--------|
 | 1 | Introduction | 53min | ✅ Complete |
-| 2 | Getting Started & Setting Up Labs | 53min | 🔲 In Progress |
-| 3 | Deploying Infrastructure with Terraform | 2hr 5min | 🔲 Not Started |
-| 4 | Read, Generate, Modify Configurations | 10hr 9min | 🔲 Not Started |
+| 2 | Getting Started & Setting Up Labs | 53min | ✅ Complete |
+| 3 | Deploying Infrastructure with Terraform | 2hr 5min | ✅ Complete |
+| 4 | Read, Generate, Modify Configurations | 10hr 9min | 🔲 In Progress |
 | 5 | Terraform Provisioners | 56min | 🔲 Not Started |
 | 6 | Terraform Modules & Workspaces | 2hr 17min | 🔲 Not Started |
 | 7 | Remote State Management | 2hr 4min | 🔲 Not Started |
@@ -114,28 +114,44 @@
   - HTTPException for clean 400 error responses
 - [x] Scripting: Day 05 - Error rates from log entries
   - defaultdict with lambda, sorting with key, side effects concept
-- [ ] Terraform course: Section 2 - Getting Started (deferred to Tuesday)
-- [ ] Job search: 2-3 applications (carry forward)
+- [x] Job search: 2 applications
 
-#### Tuesday March 10
-- [ ] Killercoda: CKA Section 5 - Application Lifecycle
-- [ ] WIMP: Dockerfile for API
-- [ ] WIMP: Push image to ghcr.io
-- [ ] **Terraform course: Section 2 + start Section 3 (afternoon — priority)**
-- [ ] Scripting: Day 06 - Parse timestamps, calculate duration
-- [ ] Job search: 2-3 applications
+#### Tuesday March 10 ✅ COMPLETE
+- [x] Killercoda: CKA Section 5 - Application Lifecycle
+  - Rolling updates with kubectl set image
+  - Rollout status, history, undo
+  - --to-revision for specific rollback
+  - kubectl scale and kubectl edit
+  - ReplicaSet behavior during updates vs scaling
+  - Annotations with kubernetes.io/change-cause
+- [x] WIMP: Dockerfile for API
+- [x] WIMP: database.py updated for container env var support
+- [x] WIMP: Docker image built and tested locally
+- [x] WIMP: Image pushed to ghcr.io/contra19/wimp-api:latest
+- [x] Terraform course: Sections 2 and 3 complete
+- [x] Scripting: Day 06 - Parse timestamps, calculate duration
+- [x] Job search: 2 applications
 
-#### Wednesday March 11
-- [ ] Killercoda: K8s Networking basics
-- [ ] WIMP: Terraform VPC configuration (plan only)
-- [ ] **Terraform course: Section 3 + start Section 4 (afternoon)**
-- [ ] Scripting: Day 07 - Aggregate metrics by service name
-- [ ] Job search: 2-3 applications
+#### Wednesday March 11 ✅ COMPLETE
+- [x] Killercoda: K8s Networking
+  - ClusterIP, NodePort service types
+  - kubectl expose shorthand
+  - DNS resolution — same namespace vs cross-namespace
+  - Full DNS format: service.namespace.svc.cluster.local
+  - NetworkPolicy — deny-all, podSelector, namespaceSelector
+  - AND vs OR logic in NetworkPolicy (indentation matters)
+- [x] WIMP: Terraform VPC configuration
+  - main.tf — VPC, Internet Gateway, public/private subnets
+  - variables.tf — region, project, environment, CIDRs
+  - terraform init — AWS provider v5.100.0
+  - terraform plan — 6 resources, 0 errors, plan clean
+- [x] Scripting: Day 07 - Aggregate metrics by service name
+- [x] Job search: 2 applications (nothing new)
 
 #### Thursday March 12
 - [ ] Killercoda: K8s Namespaces
-- [ ] WIMP: Terraform subnets and internet gateway
-- [ ] **Terraform course: Section 4 continues (afternoon)**
+- [x] WIMP: Terraform routing tables — public route table + subnet associations (plan: 9 resources clean)
+- [ ] **Terraform course: Section 4 (afternoon — priority)**
 - [ ] Scripting: Day 08
 - [ ] Job search: 2-3 applications
 
@@ -155,7 +171,8 @@
 - [ ] Terraform: EKS cluster configuration
 - [ ] WIMP: RabbitMQ via Docker Compose
 - [ ] WIMP: Basic worker service
-- [ ] K8s: Networking (CNI, DNS, Ingress)
+- [ ] K8s: Storage, ConfigMaps, Secrets
+- [ ] TherapyNotes phone screen — Tuesday March 17 at 10am EST
 
 ---
 
@@ -196,6 +213,9 @@
 - [ ] WIMP: Error handling and circuit breakers
 - [ ] WIMP: Resource limits and HPA
 - [ ] WIMP: Runbooks
+- [ ] WIMP: Terraform remote state (S3 + DynamoDB)
+- [ ] WIMP: GitHub Actions CI/CD pipeline (test → build → push → terraform plan)
+- [ ] GitHub Actions course (start when pipeline is ready to build)
 - [ ] **AWS Validation Day - April 16**
 
 ---
@@ -206,6 +226,7 @@
 - [ ] WIMP: Architecture decision record
 - [ ] WIMP: Demo script
 - [ ] WIMP: v1.0 release tag
+- [ ] WIMP: Make ghcr.io package public
 - [ ] Resume updated with certs + WIMP
 - [ ] LinkedIn updated
 
@@ -239,12 +260,19 @@
 - [x] Docker Compose for local PostgreSQL
 - [x] SQLAlchemy models (Alert table with is_duplicate)
 - [x] FastAPI connected to PostgreSQL
+- [x] Dockerfile for API
+- [x] Docker image pushed to ghcr.io/contra19/wimp-api:latest
+- [x] Terraform VPC — main.tf, variables.tf, terraform plan clean (9 resources)
+- [x] Terraform routing tables — public route table + subnet associations
+- [x] Terraform routing tables — public route table + subnet associations
+- [ ] Terraform outputs.tf
+- [ ] Terraform routing tables
+- [ ] Terraform EKS, RDS, SQS modules
+- [ ] Terraform remote state (S3 + DynamoDB)
 - [ ] RabbitMQ via Docker Compose
 - [ ] Worker services
-- [ ] Dockerfile for API
-- [ ] Terraform VPC, EKS, RDS, SQS modules
 - [ ] Kubernetes manifests
-- [ ] GitHub Actions CI/CD
+- [ ] GitHub Actions CI/CD pipeline (test → build → push → terraform plan) — Week 7
 - [ ] Prometheus + Grafana (local)
 - [ ] Resource limits and HPA
 - [ ] Health probes
@@ -268,8 +296,9 @@
 - [x] Day 03: Group by key, calculate percentages
 - [x] Day 04: Find duplicates within time window
 - [x] Day 05: Calculate error rates (defaultdict, lambda, sorting, side effects)
-- [ ] Day 06: Parse timestamps, calculate duration
-- [ ] Day 07+: Ongoing daily practice
+- [x] Day 06: Parse timestamps, calculate duration (datetime.strptime, divmod, max with key)
+- [x] Day 07: Aggregate metrics by service name (defaultdict, running totals, sorted)
+- [ ] Day 08+: Ongoing daily practice
 
 ---
 
@@ -289,3 +318,12 @@
 - McGraw Hill
 - SRE Manager (greenfield program)
 - 1 LinkedIn job
+
+**Applications sent Week 2:**
+- 2 applications Monday March 9
+- 2 applications Tuesday March 10
+- 2 applications Wednesday March 11 (nothing new in market)
+
+**Active Pipeline:**
+- TherapyNotes — Database SRE — Phone screen Tuesday March 17 10am EST with Rochelle Hall
+- Brittany (recruiter) — Datadog position — intro call Tuesday March 10 (details pending)
