@@ -280,3 +280,78 @@ alongside Prometheus metrics integration.
 by service in the last hour. Investigation consumers need raw paginated records. These are
 different query types with different performance profiles. Serving both from one endpoint
 would mean compromising both use cases. Separate endpoints keep each use case clean."
+---
+
+## Decision 013: Terraform Remote State with S3 + DynamoDB
+**Date:** March 11, 2026
+**Decision:** Store Terraform state in S3 with DynamoDB locking rather than local state
+or git
+
+**Reasoning:**
+- tfstate contains sensitive data in plaintext (passwords, keys, resource IDs) —
+  committing it to git is a security risk regardless of repo visibility
+- Local state only works for solo development — the moment a second person or CI/CD
+  pipeline runs terraform apply, state conflicts corrupt the infrastructure
+- S3 provides encrypted, versioned state storage — accidental state corruption is
+  recoverable via S3 versioning
+- DynamoDB provides state locking — prevents two concurrent applies from corrupting
+  state, the same problem a database transaction lock solves
+- This is the AWS-standard Terraform pattern used in every production environment
+
+**Tradeoffs:**
+- Requires S3 bucket and DynamoDB table to exist before Terraform can manage state
+  (chicken-and-egg — bootstrap manually or with a separate script)
+- Small additional AWS cost — negligible for a single project
+
+**Implementation:**
+```hcl
+terraform {
+  backend "s3" {
+    bucket         = "wimp-terraform-state"
+    key            = "wimp/terraform.tfstate"
+    region         = "us-east-1"
+    dynamodb_table = "wimp-terraform-locks"
+    encrypt        = true
+  }
+}
+```
+
+**Status:** Planned for Week 7 before AWS validation day. Using local state during
+development to avoid AWS costs.
+
+**Interview answer:** "Terraform state contains sensitive values in plaintext and requires
+locking for concurrent access. S3 gives us encrypted versioned storage and DynamoDB gives
+us atomic locking — the same guarantees a production database provides for concurrent
+writes. Storing state in git is a security antipattern regardless of repo visibility."
+
+---
+
+## Decision 014: WSL2 Host IP over host.docker.internal for Container Networking
+**Date:** March 11, 2026
+**Decision:** Use the WSL2 eth0 IP address directly when connecting containers to
+host services, rather than the host.docker.internal DNS alias
+
+**Reasoning:**
+- host.docker.internal resolves to the Docker Desktop VM gateway (192.168.65.254)
+  in WSL2, not the WSL2 network interface where services actually run
+- WSL2 has a layered network topology: Windows host → Docker Desktop VM → WSL2
+  instance — host.docker.internal points to the wrong layer
+- The eth0 IP (172.31.19.95) is the actual address of the WSL2 network interface
+  where PostgreSQL and other local services are bound
+- This is a local development concern only — in production, containers communicate
+  via Kubernetes service DNS, not host IP addresses
+
+**Tradeoffs:**
+- WSL2 eth0 IP can change between WSL2 restarts — may need to update DATABASE_URL
+- Acceptable for local testing; production uses K8s service DNS
+
+**Workaround:**
+```bash
+WIMP_HOST_IP=$(ip addr show eth0 | grep 'inet ' | awk '{print $2}' | cut -d/ -f1)
+docker run -e DATABASE_URL="postgresql://user:pass@${WIMP_HOST_IP}:5432/wimp" wimp-api:latest
+```
+
+**Interview answer:** "In WSL2, host.docker.internal resolves to the Docker Desktop VM
+gateway rather than the WSL2 host. We use the eth0 IP directly for local container
+testing. In production this isn't an issue since all services communicate via Kubernetes
+DNS within the cluster."

@@ -13,6 +13,16 @@ through NetworkPolicy.
 
 ---
 
+## Daily Practice Routine
+- **Morning:** HackerRank — 1 intermediate Python problem, 20-30 min max, no intellisense
+  - Domains: string manipulation, collections, datetime, log parsing, data aggregation
+  - Skip: binary trees, dynamic programming, graph traversal
+- **Morning:** Killercoda CKA lab
+- **Morning:** WIMP scripting problem (domain-relevant, builds portfolio narrative)
+- **Afternoon:** Terraform course — 2 hours minimum, non-negotiable until April 4
+
+---
+
 ## What Is Currently Working
 - FastAPI running on `http://localhost:8000`
 - GET /health → returns `{"status": "healthy", "service": "wimp-api"}`

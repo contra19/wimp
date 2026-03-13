@@ -156,11 +156,12 @@
 - [ ] Job search: 2-3 applications
 
 #### Friday March 13
-- [ ] Killercoda: Review and practice
-- [ ] WIMP: Week 2 cleanup and commit
-- [ ] **Terraform course: Section 4 continues (afternoon)**
+- [x] Killercoda: Review and practice (skipped — Terraform priority)
+- [x] WIMP: Week 2 cleanup and commit
+- [x] Terraform course: Section 4 — 147 minutes (module 71 of 104 — next session starts here)
+- [x] Scripting: Day 09 — Service retry pattern analysis (nested defaultdict, failure threshold)
 - [ ] Scripting: Day 09
-- [ ] Job search: Weekly review
+- [x] Job search: Weekly review — GoodRx, LaunchDarkly, MongoDB applied
 
 ---
 
@@ -291,6 +292,13 @@
 - [ ] Demo script
 
 ### Scripting Practice
+- [x] HackerRank daily practice added to routine (starting Monday March 16)
+  - Intermediate level only — skip beginner
+  - Focus: string manipulation, collections, datetime, log parsing, data aggregation
+  - 20-30 minutes daily, one medium problem minimum
+  - Goal: build speed and recall under pressure for timed interview screens
+  - Skip: binary trees, dynamic programming, graph traversal (not SRE relevant)
+
 - [x] Day 01: Count alerts by category (defaultdict)
 - [x] Day 02: Alert deduplication with time windows
 - [x] Day 03: Group by key, calculate percentages
@@ -298,7 +306,10 @@
 - [x] Day 05: Calculate error rates (defaultdict, lambda, sorting, side effects)
 - [x] Day 06: Parse timestamps, calculate duration (datetime.strptime, divmod, max with key)
 - [x] Day 07: Aggregate metrics by service name (defaultdict, running totals, sorted)
-- [ ] Day 08+: Ongoing daily practice
+- [x] Day 08: K8s-style event parsing (set deduplication, sorted output, datetime)
+- [x] Day 09: Service retry pattern analysis (nested defaultdict, failure threshold, None handling)
+- [ ] Day 10+: Ongoing daily practice
+- [ ] HackerRank daily practice — starts Monday March 16
 
 ---
 
@@ -323,7 +334,21 @@
 - 2 applications Monday March 9
 - 2 applications Tuesday March 10
 - 2 applications Wednesday March 11 (nothing new in market)
+- 2 applications Thursday March 12 (Assured, 1 unconfirmed)
+- 3 applications Friday March 13 (GoodRx Sr Platform Engineer, LaunchDarkly Infrastructure Engineer, MongoDB SRE Observability)
 
 **Active Pipeline:**
+- GoodRx — Sr Platform Engineer — applied March 13 (remote, Zone 2 $172K-$237K)
+- LaunchDarkly — Infrastructure Engineer — applied March 13 (remote, Zone 2 $172K-$237K)
+- MongoDB — SRE Observability — applied March 13 (remote ET/CT, $159K-$243K)
 - TherapyNotes — Database SRE — Phone screen Tuesday March 17 10am EST with Rochelle Hall
-- Brittany (recruiter) — Datadog position — intro call Tuesday March 10 (details pending)
+- Smart Synergies — applied March 10, pending
+- Ariel Partners — applied March 10, pending
+- Assured — applied March 12, pending
+
+**Closed Week 2:**
+- Brittany/Datadog — no roles currently, dead end
+- McGraw Hill — rejected March 12
+- Inhabit — no for now, requires Kubernetes experience (reapply post-CKA, June timeframe)
+- DoE/Peraton — no response, likely dead
+- Centene — no response, likely dead
