@@ -8,216 +8,199 @@
 ## Certifications
 | Cert | Target Date | Status |
 |------|-------------|--------|
-| Terraform Associate | April 4, 2026 | 🔲 In Progress |
+| Terraform Associate | Late March 23 week or early March 30 week | 🔲 Practice Tests |
 | CKA (Kubernetes Admin) | May 1, 2026 | 🔲 In Progress |
 | AWS SAA | Post-employment | ⏸ Deferred |
 
 ---
 
-## Terraform Course Progress (Zeal Vora - 25.5 hours)
+## Terraform Course Progress ✅ COMPLETE
 | Section | Title | Duration | Status |
 |---------|-------|----------|--------|
 | 1 | Introduction | 53min | ✅ Complete |
 | 2 | Getting Started & Setting Up Labs | 53min | ✅ Complete |
 | 3 | Deploying Infrastructure with Terraform | 2hr 5min | ✅ Complete |
-| 4 | Read, Generate, Modify Configurations | 10hr 9min | 🔲 In Progress |
-| 5 | Terraform Provisioners | 56min | 🔲 Not Started |
-| 6 | Terraform Modules & Workspaces | 2hr 17min | 🔲 Not Started |
-| 7 | Remote State Management | 2hr 4min | 🔲 Not Started |
-| 8 | Security Primer | 1hr 6min | 🔲 Not Started |
-| 9 | Terraform Cloud & Enterprise Capabilities | 1hr 58min | 🔲 Not Started |
-| 10 | Terraform Challenges | 1hr 34min | 🔲 Not Started |
-| 11 | Exam Preparation Section | 1hr 33min | 🔲 Not Started |
+| 4 | Read, Generate, Modify Configurations | 10hr 9min | ✅ Complete |
+| 5 | Terraform Provisioners | 56min | ✅ Complete |
+| 6 | Terraform Modules & Workspaces | 2hr 17min | ✅ Complete |
+| 7 | Remote State Management | 2hr 4min | ✅ Complete |
+| 8 | Security Primer | 1hr 6min | ✅ Complete |
+| 9 | Terraform Cloud & Enterprise Capabilities | 1hr 58min | ✅ Complete |
+| 10 | Terraform Challenges | 1hr 34min | ✅ Complete |
+| 11 | Exam Preparation Section | 1hr 33min | ✅ Complete |
+
+## Terraform Practice Test Scores
+| Test | Score | Notes |
+|------|-------|-------|
+| 1 | 100% (21/21) | |
+| 2 | 75% (rushed — 11 min for 29 questions) | Too fast, not representative |
+| 3 | 81% (21/26) | 13 minutes, reasonable pace |
+| 4 | 83% (20/24) | Exam mode, 10 minutes |
+| 5 | TBD | Monday March 23 |
+| 6 | TBD | Tuesday March 24 |
+| 7 | TBD | Tuesday March 24 |
+| HashiCorp Official | TBD | Tuesday March 24 |
+
+**Schedule exam when:** Consistently 80%+ on fresh tests with context switching between sessions
+
+---
+
+## CKA Course Progress (Mumshad Udemy)
+| Section | Title | Duration | Status |
+|---------|-------|----------|--------|
+| 1 | Introduction | 13min | ✅ Complete |
+| 2 | Core Concepts | 3hr 39min | 🔲 In Progress |
+| 3 | Scheduling | 3hr 2min | 🔲 Not Started |
+| 4 | Logging & Monitoring | 14min | 🔲 Not Started |
+| 5 | Application Lifecycle Management | 2hr 22min | 🔲 Not Started |
+| 6 | Cluster Maintenance | 46min | 🔲 Not Started |
+| 7 | Security | 4hr 4min | 🔲 Not Started |
+| 8 | Storage | 1hr 5min | 🔲 Not Started |
+| 9 | Networking | 3hr 21min | 🔲 Not Started |
+| 10 | Design and Install a K8s Cluster | 32min | 🔲 Not Started |
+| 11 | Install K8s the kubeadm way | 44min | 🔲 Not Started |
+| 12 | Helm Basics (2025) | 50min | 🔲 Not Started |
+| 13 | Kustomize Basics (2025) | 1hr 30min | 🔲 Not Started |
+| 14 | Troubleshooting | 1hr 5min | 🔲 Not Started |
+| 15 | Other Topics | 12min | 🔲 Not Started |
+| 16 | Lightning Labs | 1min | 🔲 Not Started |
+| 17 | Mock Exams | 2hr 5min | 🔲 Not Started |
+| 18 | Bonus Section | 15min | 🔲 Not Started |
 
 ---
 
 ## Week 1: Foundation + K8s Core Concepts ✅ COMPLETE
 ### March 2 - 8, 2026
-
-#### Pre-Work / Setup
-- [x] WSL2 installed and configured
-- [x] Docker Desktop installed with WSL2 backend
-- [x] kubectl installed (v1.35.2)
-- [x] Kind installed (v0.22.0)
-- [x] Terraform installed (v1.14.6)
-- [x] GitHub repo created (contra19/wimp)
-- [x] Killercoda account created
-- [x] AWS account created
-- [x] VS Code configured with WSL, Python, Docker, Kubernetes extensions
-- [x] SSH key configured for GitHub
-- [x] Kubernetes beginner course completed (Udemy)
-- [x] Zeal Vora Terraform Associate course enrolled (25.5 hours)
-
-#### Monday March 2 - Day 1
-- [x] Kind cluster created (wimp-control-plane)
-- [x] WIMP project structure created
-- [x] FastAPI skeleton with /health endpoint
-- [x] GitHub repo initialized with README
-- [x] Scripting: Count alerts by category (defaultdict pattern)
-
-#### Tuesday March 3 - Day 2 (Missed - caught up Wednesday)
-- [x] Killercoda: Create pod imperatively and declaratively
-- [x] Killercoda: Deployments, replicas, scaling
-- [x] Killercoda: Rolling updates and rollbacks (including failed rollout recovery)
-- [x] Killercoda: Services and ClusterIP
-- [x] Scripting: Alert deduplication with time windows
-
-#### Wednesday March 4 - Day 3
-- [x] Killercoda: Expose deployment with service
-- [x] Killercoda: Port-forward and service routing verification
-- [x] WIMP: POST /alerts endpoint with Pydantic validation
-- [x] WIMP: AlertCreate model with UUID and auto-timestamp
-- [x] README: API contract documented
-- [x] Scripting: Group by key, calculate percentages
-
-#### Thursday March 5 - Day 4
-- [x] Killercoda: Labels and selectors
-- [x] Killercoda: nodeSelector scheduling
-- [x] Killercoda: Taints and tolerations (including case-sensitive bug)
-- [x] WIMP: Docker Compose for local PostgreSQL
-- [x] WIMP: SQLAlchemy models (Alert table with UUID PK)
-- [x] WIMP: database.py - engine, session, Base, get_db
-- [x] WIMP: FastAPI wired to PostgreSQL - alerts storing in DB
-- [x] README: Startup/shutdown procedures documented
-- [x] Scripting: Find duplicates within time window
-
-#### Friday March 6 - Day 5 (Missed - illness, completed Sunday)
-- [x] WIMP: Alert deduplication logic in API
-- [x] WIMP: Check same service+message within 5 min window
-- [x] WIMP: All alerts recorded with is_duplicate flag
-- [x] TRACKER.md, CONTEXT.md, DECISIONS.md created
-
-#### Saturday/Sunday March 7-8
+- [x] Environment setup (WSL2, Docker, kubectl, Kind, Terraform, VS Code)
+- [x] Kind cluster created
+- [x] WIMP FastAPI skeleton + /health endpoint
+- [x] GitHub repo initialized
+- [x] Killercoda: Pods, Deployments, Services, Labels, Taints
 - [x] Kubernetes beginner course completed
-- [x] Zeal Vora Terraform Associate course enrolled
-- [x] Project tracking docs created and committed
-- [x] Cert target dates updated (Terraform: April 4, CKA: May 1)
-- [x] Terraform course Section 1 completed
+- [x] Scripting Days 01-04
+- [x] Terraform course enrolled and Section 1 complete
 
 ---
 
-## Week 2: K8s Logging + Terraform Basics
+## Week 2: K8s Logging + Terraform Basics ✅ COMPLETE
 ### March 9 - 13, 2026
-
-#### Monday March 9 ✅ COMPLETE
-- [x] Killercoda: CKA Section 4 - Logging & Monitoring
-  - kubectl logs, --follow, --tail, --previous
-  - -c flag for multi-container pods
-  - kubectl describe — reading Events section
-  - kubectl top (concept covered, metrics-server not available in env)
-- [x] WIMP: SeverityLevel Enum (info/normal/warning/critical)
-- [x] WIMP: GET /alerts endpoint with pagination
-  - page / page_size parameters
-  - severity and service_name filters
-  - start_date / end_date date range with validation
-  - AlertResponse and AlertListResponse models
-  - HTTPException for clean 400 error responses
-- [x] Scripting: Day 05 - Error rates from log entries
-  - defaultdict with lambda, sorting with key, side effects concept
-- [x] Job search: 2 applications
-
-#### Tuesday March 10 ✅ COMPLETE
-- [x] Killercoda: CKA Section 5 - Application Lifecycle
-  - Rolling updates with kubectl set image
-  - Rollout status, history, undo
-  - --to-revision for specific rollback
-  - kubectl scale and kubectl edit
-  - ReplicaSet behavior during updates vs scaling
-  - Annotations with kubernetes.io/change-cause
-- [x] WIMP: Dockerfile for API
-- [x] WIMP: database.py updated for container env var support
-- [x] WIMP: Docker image built and tested locally
-- [x] WIMP: Image pushed to ghcr.io/contra19/wimp-api:latest
-- [x] Terraform course: Sections 2 and 3 complete
-- [x] Scripting: Day 06 - Parse timestamps, calculate duration
-- [x] Job search: 2 applications
-
-#### Wednesday March 11 ✅ COMPLETE
-- [x] Killercoda: K8s Networking
-  - ClusterIP, NodePort service types
-  - kubectl expose shorthand
-  - DNS resolution — same namespace vs cross-namespace
-  - Full DNS format: service.namespace.svc.cluster.local
-  - NetworkPolicy — deny-all, podSelector, namespaceSelector
-  - AND vs OR logic in NetworkPolicy (indentation matters)
-- [x] WIMP: Terraform VPC configuration
-  - main.tf — VPC, Internet Gateway, public/private subnets
-  - variables.tf — region, project, environment, CIDRs
-  - terraform init — AWS provider v5.100.0
-  - terraform plan — 6 resources, 0 errors, plan clean
-- [x] Scripting: Day 07 - Aggregate metrics by service name
-- [x] Job search: 2 applications (nothing new)
-
-#### Thursday March 12
-- [ ] Killercoda: K8s Namespaces
-- [x] WIMP: Terraform routing tables — public route table + subnet associations (plan: 9 resources clean)
-- [ ] **Terraform course: Section 4 (afternoon — priority)**
-- [ ] Scripting: Day 08
-- [ ] Job search: 2-3 applications
-
-#### Friday March 13
-- [x] Killercoda: Review and practice (skipped — Terraform priority)
-- [x] WIMP: Week 2 cleanup and commit
-- [x] Terraform course: Section 4 — 147 minutes (module 71 of 104 — next session starts here)
-- [x] Scripting: Day 09 — Service retry pattern analysis (nested defaultdict, failure threshold)
-- [ ] Scripting: Day 09
-- [x] Job search: Weekly review — GoodRx, LaunchDarkly, MongoDB applied
+- [x] Killercoda: Logging, Application Lifecycle, Networking
+- [x] WIMP: GET /alerts with pagination, SeverityLevel Enum
+- [x] WIMP: Dockerfile, Docker image pushed to ghcr.io
+- [x] WIMP: Terraform VPC + routing tables (9 resources clean)
+- [x] Terraform Sections 2-4 complete
+- [x] Scripting Days 05-09
+- [x] Job search: 11 applications
 
 ---
 
-## Week 3: Terraform Deep Dive + K8s Networking
+## Week 3: Terraform Deep Dive + Pipeline Building ✅ COMPLETE
 ### March 16 - 20, 2026
-- [ ] Terraform course: Complete Section 4 (10hr 9min — likely spans Weeks 2-3)
-- [ ] Terraform course: Sections 5-7
-- [ ] Terraform: EKS cluster configuration
-- [ ] WIMP: RabbitMQ via Docker Compose
-- [ ] WIMP: Basic worker service
-- [ ] K8s: Storage, ConfigMaps, Secrets
-- [ ] TherapyNotes phone screen — Tuesday March 17 at 10am EST
+
+#### Monday March 16
+- [x] Scripting Day 10 — Alert escalation timer
+- [ ] HackerRank — moved to Tuesday
+- [ ] Terraform — 0 minutes, distracted
+- [ ] Job search: 0 applications
+
+#### Tuesday March 17
+- [x] HackerRank: Time Delta (Medium) — 22 min ✅
+- [x] WIMP: RabbitMQ added to Docker Compose ✅
+- [x] Terraform: Section 4 complete — 290 minutes ✅
+- [x] Job search: 9 applications ✅
+- [ ] TherapyNotes — rescheduled to Monday March 23
+
+#### Wednesday March 18
+- [x] HackerRank: The Minion Game (Medium) — 45 min ✅
+- [x] Alex Dickinson/Jobot — US Cold Storage SRE Manager, $180K ✅
+- [x] TherapyNotes — Monday March 23 1pm confirmed ✅
+- [x] Terraform: Sections 5 + 6 — 3hr 14min ✅
+- [ ] CKA Udemy course — pushed
+- [ ] Job search: 0 applications
+
+#### Thursday March 19
+- [x] HackerRank: Validating Credit Card Numbers (Medium) — 40 min ✅
+- [x] Robert Half / Dan Christenson call ✅
+- [x] Calyptus / Diamarie Schoombie — call to schedule ✅
+- [x] US Cold Storage / Tony — Monday 11am scheduled ✅
+- [x] Terraform: Sections 7 + 8 + 9 — 311 minutes ✅
+- [ ] Job search: 0 applications — fielded calls all day
+
+#### Friday March 20
+- [x] Terraform: Sections 10 + 11 complete ✅ — COURSE DONE
+- [x] Terraform practice tests 1-4 started
+  - Test 1: 100% ✅
+  - Test 2: 75% (rushed) ⚠️
+  - Test 3: 81% ✅
+  - Test 4: 83% exam mode ✅
+- [ ] Interview prep — pushed to Sunday
+- [ ] Job search: 0 applications
+
+#### Saturday March 21
+- [x] CKA Udemy course started — Section 1 complete ✅
+- [x] Section 2 started (Core Concepts, 3hr 39min — spans Monday-Tuesday)
+- [ ] Practice tests 5-7 — pushed to Monday/Tuesday
+- [ ] Interview prep — Sunday
 
 ---
 
-## Week 4: K8s Storage + Advanced Config
+## Week 4: Terraform Exam + Interviews + CKA Continues
 ### March 23 - 27, 2026
-- [ ] CKA: Storage (PV, PVC, StorageClass)
-- [ ] CKA: ConfigMaps and Secrets
-- [ ] WIMP: K8s manifests for API deployment
-- [ ] WIMP: ConfigMaps and Secrets in K8s
-- [ ] WIMP: Ingress configuration
+
+#### Sunday March 22
+- [ ] Interview prep — US Cold Storage SRE Manager
+- [ ] Interview prep — TherapyNotes Database SRE
+
+#### Monday March 23
+- [ ] CKA Section 2 — morning before 11am
+- [ ] **11am — US Cold Storage SRE Manager, Tony**
+- [ ] **1pm — TherapyNotes Database SRE, Penny Verrecchio**
+- [ ] Terraform practice test 5 — evening
+- [ ] Follow up: Dan Christenson/Robert Half if no response
+
+#### Tuesday March 24
+- [ ] Finish CKA Section 2
+- [ ] Terraform practice tests 6 + 7
+- [ ] HashiCorp official sample questions
+- [ ] Schedule Terraform exam if 80%+ consistently
+- [ ] TherapyNotes — Rochelle Hall returns, may reschedule
+
+#### Wednesday March 25 onward
+- [ ] Terraform exam — late this week if scores warrant
+- [ ] CKA course continues
+- [ ] WIMP: RabbitMQ publisher in API
+- [ ] Job applications: resume daily volume
 
 ---
 
 ## Week 5: Security + Integrations
 ### March 30 - April 3, 2026
-- [ ] CKA: Security (RBAC, ServiceAccounts, NetworkPolicy)
+- [ ] CKA: Security section (4hr 4min — heaviest section)
 - [ ] WIMP: Slack integration
 - [ ] WIMP: PagerDuty integration
 - [ ] WIMP: Alert throttling
-- [ ] Terraform course: Sections 8-11 + practice tests
-- [ ] **Terraform Associate Exam - April 4**
+- [ ] **Terraform Associate Exam — on or before April 4**
 
 ---
 
 ## Week 6: CKA Prep + Observability
 ### April 6 - 10, 2026
-- [ ] CKA: Full exam prep and practice
+- [ ] CKA: Networking (3hr 21min)
 - [ ] WIMP: Prometheus metrics
 - [ ] WIMP: Grafana dashboards
 - [ ] WIMP: GET /alerts/summary endpoint
-- [ ] WIMP: Health probes (liveness, readiness)
-- [ ] **CKA Exam - May 1**
+- [ ] WIMP: Health probes
 
 ---
 
 ## Week 7: Hardening + AWS Validation
 ### April 13 - 17, 2026
+- [ ] CKA: Mock exams + Lightning Labs
 - [ ] WIMP: Error handling and circuit breakers
-- [ ] WIMP: Resource limits and HPA
-- [ ] WIMP: Runbooks
 - [ ] WIMP: Terraform remote state (S3 + DynamoDB)
-- [ ] WIMP: GitHub Actions CI/CD pipeline (test → build → push → terraform plan)
-- [ ] GitHub Actions course (start when pipeline is ready to build)
+- [ ] WIMP: GitHub Actions CI/CD pipeline
 - [ ] **AWS Validation Day - April 16**
+- [ ] **CKA Exam - May 1**
 
 ---
 
@@ -243,112 +226,76 @@
 - [x] Alert deduplication logic (5 minute window)
 - [x] All alerts recorded with is_duplicate flag
 - [x] SeverityLevel Enum (info/normal/warning/critical)
-- [x] GET /alerts with pagination (page/page_size)
-- [x] GET /alerts severity filtering
-- [x] GET /alerts service_name filtering
-- [x] GET /alerts date range filtering (start_date/end_date)
-- [x] AlertResponse model (separate from DB model)
-- [x] AlertListResponse with total/page/size/total_pages metadata
+- [x] GET /alerts with pagination
+- [x] GET /alerts severity/service/date filtering
+- [x] AlertResponse and AlertListResponse models
 - [x] HTTPException for clean error responses
-- [ ] GET /alerts/summary (aggregated counts for dashboards) — Week 6
+- [ ] RabbitMQ publisher in POST /alerts — next feature
+- [ ] GET /alerts/summary — Week 6
 - [ ] Slack integration
 - [ ] PagerDuty integration
 - [ ] Alert throttling
-- [ ] Dependency grouping
 - [ ] Error handling and circuit breakers
 
 ### Infrastructure
-- [x] Docker Compose for local PostgreSQL
-- [x] SQLAlchemy models (Alert table with is_duplicate)
+- [x] Docker Compose — PostgreSQL + RabbitMQ
+- [x] SQLAlchemy models
 - [x] FastAPI connected to PostgreSQL
-- [x] Dockerfile for API
-- [x] Docker image pushed to ghcr.io/contra19/wimp-api:latest
-- [x] Terraform VPC — main.tf, variables.tf, terraform plan clean (9 resources)
-- [x] Terraform routing tables — public route table + subnet associations
-- [x] Terraform routing tables — public route table + subnet associations
+- [x] Dockerfile + image pushed to ghcr.io
+- [x] Terraform VPC + routing tables (9 resources clean)
 - [ ] Terraform outputs.tf
-- [ ] Terraform routing tables
 - [ ] Terraform EKS, RDS, SQS modules
 - [ ] Terraform remote state (S3 + DynamoDB)
-- [ ] RabbitMQ via Docker Compose
-- [ ] Worker services
+- [ ] RabbitMQ publisher wired into API
+- [ ] Worker service
 - [ ] Kubernetes manifests
-- [ ] GitHub Actions CI/CD pipeline (test → build → push → terraform plan) — Week 7
-- [ ] Prometheus + Grafana (local)
+- [ ] GitHub Actions CI/CD pipeline
+- [ ] Prometheus + Grafana
 - [ ] Resource limits and HPA
 - [ ] Health probes
 
 ### Documentation
-- [x] README with architecture overview
-- [x] API contract documented
-- [x] Startup/shutdown procedures
-- [x] TRACKER.md
-- [x] CONTEXT.md
-- [x] DECISIONS.md (Decisions 001-012)
+- [x] README, API contract, startup/shutdown procedures
+- [x] TRACKER.md, CONTEXT.md, DECISIONS.md (001-014)
 - [ ] .env.example files
 - [ ] Runbooks
-- [ ] Architecture diagram (Excalidraw)
-- [ ] Architecture decision record (ADR)
-- [ ] Demo script
+- [ ] Architecture diagram
+- [ ] ADR + Demo script
 
 ### Scripting Practice
-- [x] HackerRank daily practice added to routine (starting Monday March 16)
-  - Intermediate level only — skip beginner
-  - Focus: string manipulation, collections, datetime, log parsing, data aggregation
-  - 20-30 minutes daily, one medium problem minimum
-  - Goal: build speed and recall under pressure for timed interview screens
-  - Skip: binary trees, dynamic programming, graph traversal (not SRE relevant)
-
-- [x] Day 01: Count alerts by category (defaultdict)
-- [x] Day 02: Alert deduplication with time windows
-- [x] Day 03: Group by key, calculate percentages
-- [x] Day 04: Find duplicates within time window
-- [x] Day 05: Calculate error rates (defaultdict, lambda, sorting, side effects)
-- [x] Day 06: Parse timestamps, calculate duration (datetime.strptime, divmod, max with key)
-- [x] Day 07: Aggregate metrics by service name (defaultdict, running totals, sorted)
-- [x] Day 08: K8s-style event parsing (set deduplication, sorted output, datetime)
-- [x] Day 09: Service retry pattern analysis (nested defaultdict, failure threshold, None handling)
-- [ ] Day 10+: Ongoing daily practice
-- [ ] HackerRank daily practice — starts Monday March 16
+- [x] Days 01-10 complete
+- [x] HackerRank: Time Delta, Minion Game, Validating Credit Card Numbers
+- [ ] HackerRank remaining: Merge the Tools!, Athlete Sort, ginortS
+- [ ] Day 11+ ongoing
 
 ---
 
 ## Job Search
-- [x] Resume overhauled (20+ years framing)
+- [x] Resume overhauled
 - [x] LinkedIn updated with open-to-work
-- [x] Recruiter outreach drafted
 - [ ] 80+ applications target
-- [ ] Terraform cert added to resume
-- [ ] CKA cert added to resume
+- [ ] Terraform cert added to resume (post-exam)
+- [ ] CKA cert added to resume (post-exam)
 - [ ] WIMP added to portfolio/resume
 
-**Applications sent Week 1:**
-- Centene (Staff/Senior SRE)
-- Inhabit (Senior DevOps)
-- Robert Half position
-- McGraw Hill
-- SRE Manager (greenfield program)
-- 1 LinkedIn job
-
-**Applications sent Week 2:**
-- 2 applications Monday March 9
-- 2 applications Tuesday March 10
-- 2 applications Wednesday March 11 (nothing new in market)
-- 2 applications Thursday March 12 (Assured, 1 unconfirmed)
-- 3 applications Friday March 13 (GoodRx Sr Platform Engineer, LaunchDarkly Infrastructure Engineer, MongoDB SRE Observability)
+**Week 1:** 6 applications
+**Week 2:** 11 applications
+**Week 3:** 9 applications
+**Week 4 (so far):** 0
 
 **Active Pipeline:**
-- GoodRx — Sr Platform Engineer — applied March 13 (remote, Zone 2 $172K-$237K)
-- LaunchDarkly — Infrastructure Engineer — applied March 13 (remote, Zone 2 $172K-$237K)
-- MongoDB — SRE Observability — applied March 13 (remote ET/CT, $159K-$243K)
-- TherapyNotes — Database SRE — Phone screen Tuesday March 17 10am EST with Rochelle Hall
-- Smart Synergies — applied March 10, pending
-- Ariel Partners — applied March 10, pending
-- Assured — applied March 12, pending
+- US Cold Storage — SRE Manager — Monday March 23 11am, Tony, $180K
+- TherapyNotes — Database SRE — Monday March 23 1pm, Penny Verrecchio
+- GoodRx — Sr Platform Engineer — applied March 13, pending
+- LaunchDarkly — Infrastructure Engineer — applied March 13, pending
+- MongoDB — SRE Observability — applied March 13, pending
+- Robert Half / Dan Christenson — searching, follow up Monday
+- Calyptus / Diamarie Schoombie — call to schedule, Web3 focus
+- Amicus, Prove, Fireblocks, Hydrolix, Upstart, Transcend — applied March 17, pending
+- Lockheed Martin — applied March 17, possible clearance requirement
+- Smart Synergies, Ariel Partners, Assured — applied March 10-12, pending
 
-**Closed Week 2:**
-- Brittany/Datadog — no roles currently, dead end
+**Closed:**
 - McGraw Hill — rejected March 12
-- Inhabit — no for now, requires Kubernetes experience (reapply post-CKA, June timeframe)
-- DoE/Peraton — no response, likely dead
-- Centene — no response, likely dead
+- Inhabit — requires K8s, reapply post-CKA June
+- Brittany/Datadog, DoE/Peraton, Centene — no response, dead
