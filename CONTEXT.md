@@ -1,19 +1,18 @@
 # WIMP - Session Context
-## Last Updated: Saturday, March 21, 2026
+## Last Updated: Tuesday, March 24, 2026
 
 ---
 
 ## Current Status
-**Week 3 of 8 — Complete**
+**Week 4 of 8 — Day 2**
 
-Terraform course complete — all 11 sections done. Practice tests in progress.
-Scores so far: 100%, 75% (rushed), 81%, 83%. Target 80%+ consistently before scheduling exam.
-CKA Udemy course started — Section 1 complete (intro), Section 2 in progress.
+Terraform course complete. Practice tests in progress — scores 100%, 75%(rushed), 81%, 83%.
+Tests 5-7 and HashiCorp official sample questions pending.
+CKA Udemy course started — Section 1 complete, Section 2 (Core Concepts, 3hr 39min) in progress.
 
-Monday March 23 double-header:
-- 11am — US Cold Storage SRE Manager, Tony (internal TA)
-- 1pm — TherapyNotes Database SRE, Penny Verrecchio
-Interview prep Sunday March 22.
+Monday March 23 interviews completed:
+- 11am US Cold Storage SRE Manager — Tony (internal TA), Teams video call
+- 1pm TherapyNotes Database SRE — Penny Verrecchio, phone screen
 
 ---
 
@@ -28,13 +27,9 @@ Interview prep Sunday March 22.
 - WIMP application work — API features, worker service
 - HackerRank — 1 intermediate Python problem, 20-30 min, no intellisense
 
-**Afternoons until Terraform exam:**
-- Terraform practice tests + review
-- CKA course continues after Terraform exam
-
-**Post Terraform exam:**
-- CKA full focus, 2+ hours daily
-- WIMP application work on WIMP days
+**Afternoons:**
+- Terraform practice tests + review until exam scheduled
+- CKA course after Terraform exam
 
 **HackerRank filter:** Medium difficulty, subdomains: Strings, Collections,
 Date and Time, Regex and Parsing, Built-ins
@@ -138,10 +133,10 @@ docker compose down
   /docs
     /scripting       # Daily scripting practice files
       day01.py through day10.py
-  TRACKER.md         # Progress checklist
-  CONTEXT.md         # This file
-  DECISIONS.md       # Architectural decisions log
-  README.md          # Project documentation
+  TRACKER.md
+  CONTEXT.md
+  DECISIONS.md
+  README.md
 ```
 
 ---
@@ -150,61 +145,27 @@ docker compose down
 
 ### AlertCreate (Pydantic - API input validation)
 ```python
-service_name: str           # Required
-message: str                # Required
-service_version: str        # Required
-severity: SeverityLevel     # Enum: info/normal/warning/critical, defaults to "normal"
-timestamp: datetime         # Auto-generated server-side
-alert_id: UUID              # Auto-generated server-side
-is_duplicate: bool = False  # Set to True by dedup logic if duplicate detected
-```
-
-### AlertResponse (Pydantic - API output)
-```python
 service_name: str
-severity: SeverityLevel
 message: str
 service_version: str
-timestamp: datetime
-is_duplicate: bool
+severity: SeverityLevel     # Enum: info/normal/warning/critical
+timestamp: datetime         # Auto-generated
+alert_id: UUID              # Auto-generated
+is_duplicate: bool = False
 ```
 
-### AlertListResponse (Pydantic - paginated GET /alerts response)
-```python
-total: int
-page: int
-size: int
-total_pages: int
-alerts: list[AlertResponse]
-```
-
-### Alert (SQLAlchemy - Database model)
-```python
-alert_id: UUID (PK)
-service_name: String        # Indexed
-severity: String
-message: String
-service_version: String
-timestamp: DateTime
-is_duplicate: Boolean
-```
+### AlertResponse / AlertListResponse / Alert (SQLAlchemy)
+See DECISIONS.md for full model details.
 
 ---
 
 ## Terraform VPC Design
 ```
 AWS VPC (10.0.0.0/16) — wimp-dev-vpc
-├── Public Subnets
-│   ├── wimp-dev-public-1 (10.0.1.0/24) — us-east-1a
-│   └── wimp-dev-public-2 (10.0.2.0/24) — us-east-1b
-├── Private Subnets
-│   ├── wimp-dev-private-1 (10.0.10.0/24) — us-east-1a
-│   └── wimp-dev-private-2 (10.0.11.0/24) — us-east-1b
-└── Internet Gateway — wimp-dev-igw
-    └── Public Route Table + subnet associations ✅
+├── Public Subnets (10.0.1.0/24, 10.0.2.0/24)
+├── Private Subnets (10.0.10.0/24, 10.0.11.0/24)
+└── Internet Gateway + Public Route Table ✅
 ```
-
-Still to add: NAT gateway, EKS, RDS, SQS (Weeks 5-7)
 
 ---
 
@@ -212,34 +173,30 @@ Still to add: NAT gateway, EKS, RDS, SQS (Weeks 5-7)
 
 **Terraform Associate:**
 - Course: ✅ Complete (all 11 sections)
-- Practice tests: In progress — scores 100%, 75%(rushed), 81%, 83%
-- Tests remaining: 5, 6, 7 + HashiCorp official sample questions
+- Practice tests: 100%, 75%(rushed), 81%, 83% — tests 5-7 + HashiCorp official pending
 - Schedule exam when: consistently 80%+ on fresh tests with context switching
-- Target exam date: late week of March 23 or early week of March 30
+- Target exam date: this week if scores warrant
 - Cost: $70.50, online proctored via Certiverse
 
 **Key Terraform concepts to know cold:**
-- `sensitive = true` — redacts CLI output only, value still in tfstate in plain text
-- `terraform state mv` — rename resource without destroy/recreate
-- `moved {}` block — declarative alternative to state mv (Terraform 1.1+)
-- `terraform workspace new` — creates AND switches automatically
-- `terraform workspace select` — switches to existing workspace
-- `.terraform/providers/` — provider plugin location (Terraform 0.13+, NOT .terraform/plugins)
-- `dynamic` block — constructs nested configuration blocks programmatically
-- `locals {}` — define repeated expressions once, reference as local.name
-- `terraform state list` — list all resources in state file
-- Remote backend log streaming — Terraform Cloud streams plan/apply logs to terminal
-- tfstate always in plain text — use encrypted S3 + strict IAM, never git
-- Terraform Public Registry requirements: public GitHub repo, terraform-provider-name format,
-  semantic version tag — security scan is NOT a requirement
-- Implicit dependency — resource referencing another resource's attribute auto-creates dependency
-- `terraform apply -replace` — force rebuild of non-tainted resource (replaces deprecated taint)
+- sensitive = true — redacts CLI output only, value still in tfstate plain text
+- terraform state mv — rename resource without destroy/recreate
+- moved {} block — declarative alternative (Terraform 1.1+)
+- terraform workspace new — creates AND switches automatically
+- terraform workspace select — switches to existing workspace
+- .terraform/providers/ — plugin location (0.13+, NOT .terraform/plugins)
+- dynamic block — nested configuration blocks programmatically
+- locals {} — define repeated expressions once
+- terraform state list — list all resources in state file
+- Error budget = allowable failure margin from SLO (99.9% = 8.7 hrs/year)
+- Terraform Public Registry: public GitHub repo, terraform-provider-name format, semver tag required
+- terraform apply -replace — force rebuild non-tainted resource
 
 **CKA:** Mumshad Udemy course + Killercoda labs
-- Section 1: ✅ Complete (intro, 13min)
-- Section 2: Core Concepts (3hr 39min) — in progress, spans Monday-Tuesday
-- Target exam date: May 1, 2026
-- Total course remaining: ~26 hours
+- Section 1: ✅ Complete
+- Section 2: Core Concepts (3hr 39min) — in progress
+- Target exam: May 1, 2026
+- Total remaining: ~26 hours
 
 **CKA Course Breakdown:**
 | Section | Title | Duration | Status |
@@ -267,38 +224,24 @@ Still to add: NAT gateway, EKS, RDS, SQS (Weeks 5-7)
 
 ## What's Next
 
-### Sunday March 22
-- Interview prep — US Cold Storage SRE Manager
-- Interview prep — TherapyNotes Database SRE
-
-### Monday March 23
-- CKA Section 2 — as much as possible before 11am
-- **11am — US Cold Storage SRE Manager, Tony**
-- **1pm — TherapyNotes Database SRE, Penny Verrecchio**
-- Terraform practice test 5 — evening
-- Follow up with Dan Christenson/Robert Half if no response
-
-### Tuesday March 24
-- Finish CKA Section 2
-- Terraform practice tests 6, 7
-- HashiCorp official sample questions
-- If 80%+ consistently — schedule Terraform exam
-- TherapyNotes — Rochelle Hall returns, may reschedule original screen
-
-### Week of March 23 ongoing
-- Terraform exam — late this week or early next if scores warrant
-- CKA course continues daily
-- WIMP: RabbitMQ publisher in API (next WIMP feature)
-- Job applications: resume daily volume
+### This Week (March 24-28)
+- Terraform practice tests 5, 6, 7 + HashiCorp official sample questions
+- Schedule Terraform exam if 80%+ consistently
+- CKA Section 2 — finish Core Concepts
+- HackerRank daily
+- WIMP: RabbitMQ publisher in API (next feature)
+- Job applications: resume daily volume 2-3/day
+- Follow up with interview outcomes as they come in
 
 ---
 
-## Active Recruiters
-- **Tony / US Cold Storage** — SRE Manager, Monday March 23 11am
-- **Penny Verrecchio / TherapyNotes** — Database SRE, Monday March 23 1pm
-- **Alex Dickinson / Jobot** — US Cold Storage referral
-- **Dan Christenson / Robert Half** — searching pipeline, follow up Monday
-- **Diamarie Schoombie / Calyptus** — call to schedule, Web3 focus
+## Active Recruiters / Pipeline
+- US Cold Storage — SRE Manager — interviewed Monday March 23, awaiting feedback
+- TherapyNotes — Database SRE — interviewed Monday March 23, awaiting feedback
+- Alex Dickinson / Jobot — US Cold Storage referral
+- Dan Christenson / Robert Half — searching pipeline
+- Diamarie Schoombie / Calyptus — call to schedule, Web3 focus
+- Rochelle Hall / TherapyNotes — returns from leave, may reschedule original screen
 
 ---
 
@@ -323,38 +266,27 @@ Still to add: NAT gateway, EKS, RDS, SQS (Weeks 5-7)
 - Kind cluster: wimp-control-plane (v1.29.2)
 - kubectl: v1.35.2
 - Terraform: v1.14.6
-- WSL2 host IP: 172.31.19.95 (use for container-to-host PostgreSQL connections)
+- WSL2 host IP: 172.31.19.95
 
 ---
 
 ## K8s Concepts Covered
-- Pods (imperative and declarative)
-- Deployments, ReplicaSets, scaling
+- Pods, Deployments, ReplicaSets, scaling
 - Rolling updates and rollbacks
 - Services (ClusterIP, NodePort)
-- Labels and selectors
-- nodeSelector
+- Labels, selectors, nodeSelector
 - Taints and tolerations
-- kubeadm cluster bootstrap
-- Calico CNI installation
+- kubeadm cluster bootstrap, Calico CNI
 - Logging: kubectl logs, --follow, --tail, --previous, -c
-- Describe: reading Events section
-- kubectl top (concept — metrics-server required)
-- Application Lifecycle: set image, rollout, undo, --to-revision, scale, edit
-- Networking: ClusterIP, NodePort, DNS resolution, cross-namespace DNS
-- NetworkPolicy: deny-all, podSelector, namespaceSelector, AND vs OR logic
-- Namespaces: create, switch context, -n flag, --all-namespaces/-A, isolation, delete cascade
+- Application Lifecycle: set image, rollout, undo, scale, edit
+- Networking: ClusterIP, NodePort, DNS, cross-namespace DNS
+- NetworkPolicy: deny-all, podSelector, namespaceSelector
+- Namespaces: create, switch context, -n flag, --all-namespaces/-A
 
-## K8s Concepts Still To Cover (via CKA Udemy course)
-- Core Concepts (Section 2 — in progress)
-- Scheduling
-- ConfigMaps and Secrets
-- Persistent Volumes
-- Ingress
-- RBAC
-- Resource limits and HPA
-- Liveness/readiness probes
-- kubeadm upgrade
-- etcd backup and restore
-- Helm, Kustomize
-- Troubleshooting
+## K8s Concepts Still To Cover
+- Core Concepts deep dive (Section 2 in progress)
+- Scheduling, ConfigMaps, Secrets
+- Persistent Volumes, Ingress, RBAC
+- Resource limits, HPA, probes
+- kubeadm upgrade, etcd backup/restore
+- Helm, Kustomize, Troubleshooting
